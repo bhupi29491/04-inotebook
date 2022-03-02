@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import NoteContext from "../context/notes/noteContext";
+~import noteContext from "../context/notes/noteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
 
 const Notes = () => {
-  const context = useContext(NoteContext);
+  const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
   }, []);
-
   const ref = useRef(null);
   const refClose = useRef(null);
   const [note, setNote] = useState({
@@ -22,8 +21,6 @@ const Notes = () => {
 
   const updateNote = (currentNote) => {
     ref.current.click();
-
-    //Setting the values of selected note into the editable Modal fields
     setNote({
       id: currentNote._id,
       etitle: currentNote.title,
@@ -32,14 +29,11 @@ const Notes = () => {
     });
   };
 
-  // To handle the click of Submit button
   const handleClick = (e) => {
-    console.log("Updating the note");
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
   };
 
-  // To handle the click of Submit button
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
@@ -120,8 +114,6 @@ const Notes = () => {
                     name="etag"
                     value={note.etag}
                     onChange={onChange}
-                    minLength={5}
-                    required
                   />
                 </div>
               </form>
@@ -136,7 +128,9 @@ const Notes = () => {
                 Close
               </button>
               <button
-                disabled={note.etitle.length<5 || note.edescription.length<5}
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
                 onClick={handleClick}
                 type="button"
                 className="btn btn-primary"
@@ -147,8 +141,9 @@ const Notes = () => {
           </div>
         </div>
       </div>
+
       <div className="row my-3">
-        <h2>Your Notes</h2>
+        <h2>You Notes</h2>
         <div className="container mx-2">
           {notes.length === 0 && "No notes to display"}
         </div>
