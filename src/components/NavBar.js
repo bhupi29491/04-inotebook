@@ -38,16 +38,9 @@ import { Link, useLocation } from "react-router-dom";
               </li>
             </ul>
             <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+                <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
+                <Link className="btn btn-primary mx-1" to="/signup" role="button">Signup</Link>
+             </form>
           </div>
         </div>
       </nav>
